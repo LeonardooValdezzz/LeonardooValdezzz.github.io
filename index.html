@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ILOVEYOU</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #d51b87, #5b0534);
+            /* Degradado de color */
+        }
+
+        .container {
+            position: relative;
+            /* Necesario para posicionar el texto sobre el cubo */
+        }
+
+        .photo {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 10s infinite linear;
+            border: 2px solid #fff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .photo img:nth-child(1) {
+            transform: rotateY(0deg) translateZ(150px);
+        }
+
+        .photo img:nth-child(2) {
+            transform: rotateY(90deg) translateZ(150px);
+        }
+
+        .photo img:nth-child(3) {
+            transform: rotateY(180deg) translateZ(150px);
+        }
+
+        .photo img:nth-child(4) {
+            transform: rotateY(270deg) translateZ(150px);
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotateY(0deg);
+            }
+
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .info-container {
+            perspective: 1000px;
+            background: rgba(255, 255, 255, 0.8);
+            /* Fondo semi-transparente para el contenedor */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            /* Ancho del contenedor */
+            text-align: center;
+        }
+
+        #message {
+            font-size: 24px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        audio {
+            margin-top: 20px;
+        }
+
+        .love-text {
+            position: absolute;
+            top: -60px;
+            /* Ajustar según sea necesario */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 48px;
+            /* Tamaño de fuente grande */
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            /* Efecto de sombra para mejorar la legibilidad */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="love-text">I❤️YOU</div>
+        <div class="photo">
+            <img src="img/Amor1.jfif">
+            <img src="img/Amor4.jfif" alt="Photo 2">
+            <img src="img/Amor3.jfif" alt="Photo 3">
+            <img src="img/Amor2.jfif" alt="Photo 4">
+        </div>
+
+        <div class="info-container">
+            <div id="message">
+            </div>
+
+            <audio id="myAudio" controls autoplay loop>
+                <source src="Musica/Julión Álvarez y su Norteño Banda - Lo Tienes Todo (Video Lyric).mp3"
+                    type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        const messageDiv = document.getElementById('message');
+
+        const messages = [
+            "¡FELICES 3 MESES, MI AMOR! ❤️",
+            "CADA MOMENTO A TU LADO ES UN REGALO...🥰",
+            "QUEDATE SIEMPRE A MI LADO. ¡TE AMO CON TODO MI SER! 💑",
+            "LAS PALABRAS NO PUEDEN EXPRESAR MI AMOR 💝",
+            "ESCUCHA ESTA CANCIÓN 👉👈",
+            "JULIÓN TE EXPRESARA MEJOR LO QUE SIENTO POR TÍ💕"
+        ];
+
+
+        let index = 0;
+
+        function displayMessage() {
+            messageDiv.innerHTML = `<p>${messages[index]}</p>`;
+            fadeIn(messageDiv);
+            index = (index + 1) % messages.length;
+            setTimeout(displayMessage, 3000);
+        }
+
+        function fadeIn(element) {
+            let opacity = 0;
+            const timer = setInterval(function () {
+                if (opacity >= 1) {
+                    clearInterval(timer);
+                }
+                element.style.opacity = opacity;
+                opacity += 0.1;
+            }, 200);
+        }
+
+        displayMessage();
+    </script>
+</body>
+
+</html>
