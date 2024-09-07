@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Amor</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #d51b87, #5b0534);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: auto;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+            margin: auto;
+            min-width: 300px;
+            position: relative;
+            /* Agregado para asegurar que las flechas se posicionen correctamente */
+        }
+
+        h1 {
+            color: #ff66b2;
+        }
+
+        .slideshow {
+            position: relative;
+            max-width: 100%;
+            margin: 20px auto;
+        }
+
+        .slides {
+            display: none;
+        }
+
+        .slides img {
+            max-width: 100%;
+            max-height: 400px;
+            width: auto;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .description {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Fondo semi-transparente para mejor visibilidad */
+            z-index: 1;
+            /* Asegura que las flechas estén sobre las imágenes */
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev {
+            left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .message {
+            color: #ff66b2;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .video-container {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .video-container video {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+
+        .show-video {
+            color: #ff66b2;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .btn-love {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-love:hover {
+            background-color: #ff1493;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .slides img {
+                max-height: 300px;
+            }
+
+            .prev,
+            .next {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .video-container video {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 20px;
+            }
+
+            .message {
+                font-size: 16px;
+            }
+
+            .prev,
+            .next {
+                font-size: 12px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="button-container">
+            <a href="index.html" class="btn-love">Regresar</a>
+        </div>
+        <h1>Para mi niña linda en nuestro 4to mes ❤️</h1>
+        <div class="slideshow">
+            <div class="slides">
+                <img src="img/love9.jfif" alt="Foto 1">
+                <p class="description">Nuestra primera foto juntos, el comienzo de una hermosa aventura. 💖✨</p>
+            </div>
+            <div class="slides">
+                <img src="img/love13.jfif" alt="Foto 2">
+                <p class="description">Ese día me hiciste sentir la persona más afortunada del mundo. 🌟💑</p>
+            </div>
+            <div class="slides">
+                <img src="img/love14.jfif" alt="Foto 3">
+                <p class="description">Siempre a tu lado, en las buenas y en las malas. Esa fue nuestra promesa. 💖🤝
+                </p>
+            </div>
+            <div class="slides">
+                <img src="img/Amor3.jfif" alt="Foto 4">
+                <p class="description">Nuestra primera salida a Chapultepec, un día inolvidable. 🌳💞</p>
+            </div>
+            <div class="slides">
+                <img src="img/love11.jfif" alt="Foto 5">
+                <p class="description">El día del baby shower, me encantó que me acompañaras. 👶🎉</p>
+            </div>
+            <div class="slides">
+                <img src="img/love7.jfif" alt="Foto 6">
+                <p class="description">Nuestra salida al museo, donde seguimos creando recuerdos juntos. 🎨💑</p>
+            </div>
+            <div class="slides">
+                <img src="img/Amor4.jfif" alt="Foto 7">
+                <p class="description">Una tarde mágica junto a ti en la Villita. 🌅💫</p>
+            </div>
+            <div class="slides">
+                <img src="img/love8.jfif" alt="Foto 8">
+                <p class="description">Ese día confirmé cuánto significas para mí. La nota lo dice todo. 💞📜</p>
+            </div>
+            <div class="slides">
+                <img src="img/love12.jfif" alt="Foto 13">
+                <p class="description">Ver nuestra foto bajo ese rosario fue algo hermoso. Ojalá me permitas estar allí
+                    siempre contigo. 💖🙏</p>
+            </div>
+            <div class="slides">
+                <img src="img/love2.jfif" alt="Foto 10">
+                <p class="description">Cada día contigo es especial y único. 💕🌷</p>
+            </div>
+            <div class="slides">
+                <img src="img/love1.jfif" alt="Foto 11">
+                <p class="description">Momentos que jamás olvidaré, tú eres mi mejor recuerdo. 🌷💭</p>
+            </div>
+            <div class="slides">
+                <img src="img/love6.jfif" alt="Foto 12">
+                <p class="description">Déjame cuidarte siempre, eres mi persona favorita. 🥰❤️</p>
+            </div>
+            <div class="slides">
+                <img src="img/love4.jfif" alt="Foto 8">
+                <p class="description">¿Sabes?...Te considero mi REGALO DE DIOS, ¿Por qu&eacute;? Simple...LO TIENES
+                    TODO! 💞🌷</p>
+            </div>
+            <div class="slides">
+                <img src="img/love5.jfif" alt="Foto 13">
+                <p class="description">Sin duda alguna son mis 2 amores. 💖🙏</p>
+            </div>
+            <div class="slides">
+                <div class="description">
+                    <p>Hemos vivido juntos tanto momentos maravillosos como difíciles.</p>
+                    <p>A pesar de todo, mi deseo es ser parte de tu vida y ofrecerte mi apoyo incondicional.</p>
+                    <p>Quiero que dejemos el pasado atrás y construyamos un futuro juntos.</p>
+                    <p>Independientemente de tu decisi&oacute;n final quiero que sepas...</p>
+                    <p>No me debes nada, lo hice por t&iacute; 💑</p>
+                    <p>Lo único que necesito es una respuesta clara de tu parte...</p>
+                    <p>👇💖</p>
+                </div>
+                <div class="info-container">
+                    <audio id="myAudio" controls autoplay loop>
+                        <source src="Musica/Julión Álvarez - Fuentes de Ortiz (Video Lyrics).mp3" type="audio/mpeg">
+                        Tu navegador no soporta el elemento de audio.
+                    </audio>
+                </div>
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+
+        <p class="message">Gracias por estos maravillosos 4 meses juntos, Te amo. 💖🥰</p>
+
+        <div class="video-container" id="videoContainer">
+            <video controls>
+                <source src="img/mis2loves.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de video.
+            </video>
+        </div>
+
+        <p><span class="show-video" onclick="showVideo()">Ver video especial 🎥💝</span></p>
+    </div>
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("slides");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex - 1].style.display = "block";
+        }
+
+        function showVideo() {
+            document.getElementById("videoContainer").style.display = "block";
+        }
+    </script>
+</body>
+
+</html>
