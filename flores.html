@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flor Amarilla Interactiva</title>
+    <style>
+        @keyframes shake {
+            0% {
+                transform: translate(0);
+            }
+
+            25% {
+                transform: translate(-5px, 5px);
+            }
+
+            50% {
+                transform: translate(5px, -5px);
+            }
+
+            75% {
+                transform: translate(-5px, -5px);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #d51b87, #5b0534);
+            overflow: hidden;
+        }
+
+        .flower-container {
+            position: relative;
+            opacity: 0;
+            transform: scale(0);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            animation: shake 1s infinite;
+        }
+
+        .flower {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+
+        .petal {
+            position: absolute;
+            width: 80px;
+            height: 40px;
+            background-color: yellow;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .petal-1 {
+            transform: rotate(0deg);
+            top: 30%;
+            left: 50%;
+            transform-origin: 0% 50%;
+        }
+
+        .petal-2 {
+            transform: rotate(60deg);
+            top: 30%;
+            left: 50%;
+            transform-origin: 0% 50%;
+        }
+
+        .petal-3 {
+            transform: rotate(120deg);
+            top: 30%;
+            left: 50%;
+            transform-origin: 0% 50%;
+        }
+
+        .petal-4 {
+            transform: rotate(180deg);
+            top: 30%;
+            left: 50%;
+            transform-origin: 0% 50%;
+        }
+
+        .petal-5 {
+            transform: rotate(240deg);
+            top: 30%;
+            left: 50%;
+            transform-origin: 0% 50%;
+        }
+
+        .petal-6 {
+            transform: rotate(300deg);
+            top: 30%;
+            left: 50%;
+            transform-origin: 0% 50%;
+        }
+
+        .center {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: orange;
+            border-radius: 50%;
+            top: calc(50% - 20px);
+            left: calc(50% - 20px);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .stem {
+            position: absolute;
+            width: 10px;
+            height: 100px;
+            background-color: green;
+            bottom: -100px;
+            left: calc(50% - 5px);
+        }
+
+        .leaf {
+            position: absolute;
+            width: 60px;
+            height: 30px;
+            background-color: green;
+            border-radius: 30px / 15px;
+        }
+
+        .leaf-left {
+            bottom: -70px;
+            left: -20px;
+            transform-origin: right;
+            transform: rotate(-45deg);
+            opacity: 0;
+            transition: opacity .5s ease-in-out;
+        }
+
+        .leaf-right {
+            bottom: -70px;
+            right: -20px;
+            transform-origin: left;
+            transform: rotate(45deg);
+            opacity: 0;
+            transition: opacity .5s ease-in-out;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #d10a99;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            text-align: center;
+        }
+
+        .falling-petal {
+            position: absolute;
+            width: 30px;
+            height: 15px;
+            background-color: yellow;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall linear forwards;
+        }
+
+        .image {
+            display: none;
+            position: absolute;
+            width: 140px;
+            /* Ajusta el tamaño según sea necesario */
+            height: auto;
+            clip-path: url(#flowerClip);
+            opacity: 0;
+            transition: opacity 0.5s;
+            top: 10%;
+            /* Ajusta según sea necesario para centrar la imagen */
+            left: 50%;
+            transform: translateX(-50%);
+            /* Centra horizontalmente */
+            border: 10px solid yellow;
+            /* Aumenta el tamaño del borde */
+            box-shadow: 0 0 30px yellow, 0 0 50px yellow;
+            /* Sombra amarilla más intensa */
+            border-radius: 15px;
+            /* Bordes redondeados */
+            z-index: 1;
+            /* Asegura que esté por encima de otros elementos */
+        }
+
+        .image.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .flower.hidden {
+            opacity: 0;
+        }
+
+        .info-container {
+            perspective: 1000px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            width: 300px;
+            text-align: center;
+        }
+
+        .btn-love {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-love:hover {
+            background-color: #ff1493;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <svg width="0" height="0">
+        <defs>
+            <clipPath id="flowerClip">
+                <path
+                    d="M75,0 C100,25 125,25 150,0 C125,50 125,100 150,125 C125,125 100,150 75,125 C50,150 25,125 0,125 C25,100 25,50 0,0 C25,25 50,25 75,0 Z" />
+            </clipPath>
+        </defs>
+    </svg>
+
+    <center>        
+        <div class="info-container">
+            <div id="message"></div>
+            <audio id="myAudio" controls>
+                <source src="Musica/Vi esta flor ( Sherk ).mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+    </center>
+    <br>
+    <div class="flower-container" id="flower-container">
+        <div class="flower" id="flower">
+            <div class="petal petal-1"></div>
+            <div class="petal petal-2"></div>
+            <div class="petal petal-3"></div>
+            <div class="petal petal-4"></div>
+            <div class="petal petal-5"></div>
+            <div class="petal petal-6"></div>
+            <div class="center" id="center"></div>
+        </div>
+        <div class="stem"></div>
+        <div class="leaf leaf-left"></div>
+        <div class="leaf leaf-right"></div>
+        <img src="img/love23.jfif" class="image" id="specialImage" alt="Imagen especial">
+    </div>
+
+    <script>
+        const flowerContainer = document.getElementById('flower-container');
+        const petals = document.querySelectorAll('.petal');
+        const center = document.getElementById('center');
+        const leaves = document.querySelectorAll('.leaf');
+        const message = document.getElementById('message');
+        const specialImage = document.getElementById('specialImage');
+
+        const messages = [
+            'Mi amor...🌻',
+            'Te amooo!! 💘',
+            'Eres una niña incrible..! ❤',
+            'No tienes idea lo especial que eres en mi vida 🥰',
+            'Vamos a esforzarnos, quiero quedarme contigo 💝',
+            'Mi flor favorita es cuando das clic a la flor!🌻 '
+        ];
+
+        let currentMessageIndex = 0;
+
+        const showNextMessage = () => {
+            message.style.opacity = '0'; // Ocultar el mensaje actual
+            setTimeout(() => {
+                message.textContent = messages[currentMessageIndex];
+                message.style.opacity = '1'; // Mostrar el nuevo mensaje
+            }, 500); // Tiempo para ocultar
+            currentMessageIndex = (currentMessageIndex + 1) % messages.length; // Ciclo a través de los mensajes
+        };
+
+        setInterval(showNextMessage, 3000); // Cambia el mensaje cada segundo
+
+
+        let petalIndex = -1;
+        let isImageVisible = false;
+
+        flowerContainer.style.opacity = '1';
+        flowerContainer.style.transform = 'scale(1)';
+
+        const showFlower = () => {
+            if (petalIndex < petals.length - 1) {
+                petalIndex++;
+                petals[petalIndex].style.opacity = '1';
+
+                if (petalIndex === petals.length - 1) {
+                    center.style.opacity = '1';
+                    leaves.forEach(leaf => {
+                        leaf.style.opacity = '1';
+                    });
+                    message.style.opacity = '1';
+                }
+            }
+        };
+
+        setInterval(showFlower, 500);
+
+        setInterval(createFallingPetal, 1000);
+
+        function createFallingPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('falling-petal');
+
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            petal.style.animationDelay = Math.random() + 's';
+
+            document.body.appendChild(petal);
+
+            petal.addEventListener('animationend', () => {
+                petal.remove();
+            });
+        }
+
+        flowerContainer.addEventListener('click', () => {
+            if (isImageVisible) {
+                specialImage.classList.remove('show');
+                specialImage.style.display = 'none';
+                flowerContainer.querySelector('.flower').classList.remove('hidden');
+            } else {
+                specialImage.style.display = 'block';
+                specialImage.classList.add('show');
+                flowerContainer.querySelector('.flower').classList.add('hidden');
+            }
+            isImageVisible = !isImageVisible;
+        });
+    </script>
+</body>
+
+</html>
