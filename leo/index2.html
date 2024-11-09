@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medio Año Especial</title>
+    <style>
+        /* Estilo de pantalla completa */
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffebf0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Botón inicial */
+        #startButton {
+            padding: 20px 40px;
+            font-size: 24px;
+            background-color: #ff99cc;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            outline: none;
+            font-weight: bold;
+            animation: breathing 2s ease-in-out infinite;
+            box-shadow: 0 4px 15px rgba(255, 153, 204, 0.5);
+            transition: background-color 0.3s;
+        }
+
+        /* Efecto de respiración */
+        @keyframes breathing {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Hover en el botón */
+        #startButton:hover {
+            background-color: #ff80b3;
+        }
+
+        /* Estilo para el número 6 */
+        #number6 {
+            font-size: 80px;
+            /* Tamaño inicial más grande */
+            color: #ff6f91;
+            font-weight: bold;
+            position: absolute;
+            top: 25%;
+            /* Ubicado más arriba */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Estilo para los mensajes flotantes */
+        .message {
+            position: absolute;
+            font-size: 24px;
+            /* Tamaño de mensaje más grande */
+            color: #ff6f91;
+            animation: floatUp 3s ease-out;
+            opacity: 0;
+            cursor: pointer;
+            /* Cambia el cursor para indicar que es clickeable */
+        }
+
+        /* Animación para subir mensajes */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+        }
+
+        /* Estilo para los corazones */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6f91;
+            transform: rotate(45deg);
+            animation: floatHeart 4s infinite;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6f91;
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 10px;
+            top: 0;
+        }
+
+        /* Animación para los corazones */
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0) rotate(45deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-150px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        /* Estilo del popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 100%;
+            /* Limita el ancho máximo al 80% del ancho de la pantalla */
+            max-height: 100%;
+            /* Limita la altura máxima al 80% de la pantalla */
+            overflow: auto;
+            /* Permite desplazarse si el contenido excede el tamaño del popup */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            /* Sombra más suave */
+            z-index: 100;
+            animation: fadeInPopup 0.5s ease;
+        }
+
+        @keyframes fadeInPopup {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .close {
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: red;
+            float: right;
+        }
+
+        #memory-content {
+            margin-top: 10px;
+        }
+
+        audio {
+            display: none;
+            /* Oculta el audio por defecto */
+        }
+
+        /* Estilo para la imagen en el popup */
+        #memory-image {
+            width: 100%;
+            /* La imagen ocupa el 100% del ancho disponible dentro del contenedor */
+            max-width: 300px;
+            /* Limita el tamaño máximo de la imagen */
+            height: auto;
+            /* Mantiene la relación de aspecto */
+            border-radius: 5px;
+            display: block;
+            /* Hace que la imagen se comporte como un bloque */
+            margin: 0 auto;
+            /* Centra la imagen horizontalmente */
+            padding-top: 10px;
+            /* Espacio superior entre la imagen y el contenido */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Botón inicial para iniciar la experiencia -->
+    <button id="startButton">Haz clic y en cada frase siguiente da click 💖</button>
+    <!-- Número 6 que crece gradualmente -->
+    <div id="number6">6 Meses 💖</div>
+
+    <!-- Popup para mostrar los recuerdos -->
+    <div id="memory-popup" class="popup">
+        <span class="close" onclick="closePopup()">✖️</span>
+        <div id="memory-content"></div>
+        <img id="memory-image" src="" alt="Recuerdo" style="display:none;">
+    </div>
+
+    <!-- Audio de fondo -->
+    <audio id="background-music" src="../Musica/Max Torres - Nunca Te Diré Adiós (.mp3" loop></audio>
+
+    <script>
+        const mensajes = [
+            { texto: "Mi niña💖", detalle: "Eres lo más hermoso que me ha pasado. 🌟 Siempre haces mi vida más bonita. 😘", imagen: '../img/corazon1.jfif' },
+            { texto: "Mi preciosa 🌹", detalle: "Tu sonrisa ilumina mis días. 🌞 Cada momento contigo es un regalo. 🎁", imagen: '../img/corazon6.jfif' },
+            { texto: "Mi piquito de oro 💋", detalle: "No hay palabras que describan lo feliz que me haces. 💕 Eres todo lo que siempre soñé. ✨", imagen: '../img/love4.jfif' },
+            { texto: "Me encantas 😍", detalle: "Cada día me enamoro más de ti. ❤️ Eres mi razón para sonreír. 😊", imagen: '../img/love21.jfif' },
+            { texto: "Quédate siempre 🥰", detalle: "Eres mi lugar favorito en el mundo. 🌍 No quiero estar en ningún otro sitio que no sea a tu lado. 🫶", imagen: '../img/love15.jfif' },
+            { texto: "Me fascinas 🌷", detalle: "No podría imaginar mi vida sin ti. 💖 Eres mi todo, mi paz y mi amor. 🕊️", imagen: '../img/love18.jfif' },
+            { texto: "Eres el amor de mi vida 💞", detalle: "Quiero pasar cada momento a tu lado. 🥰 No hay nada que me haga más feliz. 🎉", imagen: '../img/corazon2.jfif' },
+            { texto: "Mi chaparrita 💕", detalle: "Adoro cada cosa que haces. 😍 Eres mi alegría, mi razón de ser. 🌟", imagen: '../img/love11.jfif' },
+            { texto: "Mi riqueza💎", detalle: "Eres mi mayor tesoro. 💖 No necesito más que tu amor para sentirme completo. 💫", imagen: '../img/love13.jfif' },
+            { texto: "Me haces feliz 😊", detalle: "Gracias por ser tú, tan increíble. 🙏 Me haces sentir afortunado todos los días. 🍀", imagen: '../img/corazon3.jfif' },
+            { texto: "Te adoro 😘", detalle: "No hay nada que no haría por ti. 💘 Te quiero más de lo que las palabras pueden decir. 🥰", imagen: '../img/love12.jfif' },
+            { texto: "Mi universo 🌌", detalle: "En estos seis meses, me has mostrado un mundo nuevo, lleno de amor y esperanza. No imagino mi vida sin ti. ✨💖", imagen: '../img/love5.jfif' },
+            { texto: "Mi luz 🌞", detalle: "Tú eres quien ilumina mis días y da calor a mi vida. Gracias por ser el sol en mi cielo. 🌅💛", imagen: '../img/corazon6.jfif' },
+            { texto: "Mi complemento perfecto 💋", detalle: "Todo cobra sentido a tu lado. Eres mi mejor amigo(a), mi amor, mi todo. No podría pedir nada más. 🌸❤️", imagen: '../img/corazon5.jfif' },
+            { texto: "Mi lugar seguro 🏡", detalle: "Contigo encontré un hogar, un lugar donde puedo ser yo mismo(a) y donde quiero quedarme siempre. 🏠💖", imagen: '../img/love2.jfif' },
+            { texto: "Mi refugio de paz 🕊️", detalle: "En tu abrazo encuentro calma y en tu sonrisa, paz. Eres mi refugio en este mundo. 💫🕊️", imagen: '../img/love15.jfif' },
+            { texto: "Eres mi felicidad 🌈", detalle: "Tú haces que todo valga la pena. Eres la razón por la que cada día tiene sentido. Te amo más de lo que puedo expresar. 💕", imagen: '../img/love18.jfif' },
+            { texto: "Mi amor eterno 💞", detalle: "Estos seis meses son solo el comienzo. Mi amor por ti es infinito, y quiero que dure para siempre. ♾️💘", imagen: '../img/corazon2.jfif' },
+            { texto: "Mi razón de ser 🌹", detalle: "Cada día me despierto agradecido(a) por tenerte. Eres mi motivo para sonreír y ser mejor. Eres mi todo. 🌸✨", imagen: '../img/corazon4.jfif' },
+            { texto: "Mi más grande bendición ✨", detalle: "No todos encuentran a alguien como tú. Gracias por entrar en mi vida y llenarla de luz y amor. 💖🌟", imagen: '../img/love13.jfif' },
+            { texto: "Mi sonrisa constante 😊", detalle: "Es imposible no sonreír cuando pienso en ti. Me haces feliz de una forma que nadie más podría. 😄💞", imagen: '../img/love20.jfif' },
+            { texto: "Mi sueño hecho realidad 😘", detalle: "Desde que te conocí, mis sueños se volvieron reales. Gracias por hacer mi vida más maravillosa cada día. 💕🌟", imagen: '../img/love23.jfif' },
+            { texto: "Mi amor infinito 💖", detalle: "Seis meses a tu lado y aún siento que esto es solo el comienzo. No hay fin para el amor que siento por ti. ♾️💞", imagen: '../img/love21.jfif' },
+            { texto: "Mi mejor decisión 💍", detalle: "Elegirte cada día es lo mejor que me ha pasado. Eres mi compañera, mi amor y mi inspiración. 💫🫶", imagen: '../img/love22.jfif' },
+            { texto: "Mi alegría constante 😄", detalle: "Con solo verte, todo en mi mundo mejora. Me haces feliz con cada palabra y cada gesto. Te amo infinitamente. 💕🌟", imagen: '../img/love14.jfif' },
+            { texto: "Mi inspiración 💫", detalle: "Me inspiras a ser mejor, a crecer, y a soñar sin límites. Gracias por ser el motor de mi vida. 🚀💖", imagen: '../img/corazon7.jfif' }
+        ];
+
+        let clickCount = 0;
+        const maxClicks = 5;  // Número de clics antes de la "explosión"
+        const number6 = document.getElementById("number6");
+        const audio = document.getElementById("background-music");
+
+        function celebrar() {
+            audio.play(); // Reproducir música al iniciar la celebración
+            generarConfeti();
+            generarMensajes();
+            generarCorazones();
+
+            setInterval(() => {
+                generarConfeti();
+                generarMensajes();
+                generarCorazones();
+            }, 1000);
+        }
+
+        function crecer6() {
+            clickCount++;
+            const newSize = 80 + clickCount * 40; // Incremento considerable en el tamaño
+            number6.style.transform = `translate(-50%, -50%) scale(${1 + clickCount * 0.4})`;
+            number6.style.opacity = 1;
+
+            // Cambia el texto a "6 meses" en el quinto clic
+            if (clickCount === maxClicks) {
+                number6.textContent = "6 meses";
+            }
+
+            if (clickCount >= maxClicks) {
+                setTimeout(() => {
+                    number6.style.display = "none";  // Oculta el "6" tras la explosión
+                }, 500); // Tiempo de espera antes de ocultar el número
+            }
+        }
+
+        function generarConfeti() {
+            for (let i = 0; i < 30; i++) { // Incrementar la cantidad de confeti
+                const confeti = document.createElement('div');
+                confeti.classList.add('confetti');
+                confeti.style.position = 'absolute';
+                confeti.style.left = `${Math.random() * 100}%`;
+                confeti.style.top = `${Math.random() * 100}%`;
+                confeti.style.width = '8px';
+                confeti.style.height = '8px';
+                confeti.style.backgroundColor = 'rgba(255, 20, 147, 1)';
+                confeti.style.opacity = 1;
+                document.body.appendChild(confeti);
+                setTimeout(() => {
+                    confeti.style.opacity = 0; // Se desvanece
+                    confeti.style.transform = `translateY(-100px)`; // Se mueve hacia arriba
+                }, 0);
+                setTimeout(() => {
+                    confeti.remove(); // Se elimina después de que se desvanece
+                }, 2000);
+            }
+        }
+
+        function generarMensajes() {
+            const mensaje = mensajes[Math.floor(Math.random() * mensajes.length)];
+            const div = document.createElement('div');
+            div.classList.add('message');
+            div.textContent = mensaje.texto;
+            div.style.left = `${Math.random() * 100}%`;
+            div.style.top = `${Math.random() * 100}%`;
+            document.body.appendChild(div);
+            setTimeout(() => {
+                div.remove(); // Se elimina después de la animación
+            }, 3000);
+
+            // Mostrar popup con el mensaje al hacer clic
+            div.onclick = () => {
+                mostrarPopup(mensaje);
+            };
+        }
+
+        function generarCorazones() {
+            for (let i = 0; i < 10; i++) { // Aumentar la cantidad de corazones
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.top = `${Math.random() * 100}%`;
+                document.body.appendChild(heart);
+                setTimeout(() => {
+                    heart.remove(); // Se elimina después de la animación
+                }, 4000);
+            }
+        }
+
+        function mostrarPopup(mensaje) {
+            document.getElementById("memory-content").textContent = mensaje.detalle;
+            const memoryImage = document.getElementById("memory-image");
+            memoryImage.src = mensaje.imagen;
+            memoryImage.style.display = 'block';
+            document.getElementById("memory-popup").style.display = 'block';
+        }
+        function closePopup() {
+            const popup = document.getElementById("memory-popup");
+            const contenido = document.getElementById("memory-content");
+            const image = document.getElementById("memory-image");
+            popup.style.display = "none"; // Oculta el popup
+            contenido.textContent = ""; // Limpia el contenido
+            image.style.display = "none"; // Oculta la imagen
+        }
+
+        // Asignar eventos
+        document.getElementById("startButton").onclick = () => {
+            celebrar();
+            crecer6();
+            document.getElementById("startButton").style.display = "none"; // Oculta el botón
+        };
+    </script>
+</body>
+
+</html>
