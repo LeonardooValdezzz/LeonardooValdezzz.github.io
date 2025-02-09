@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9 Meses Contigo 💖</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #ff6f61, #ff9a9e);
+            text-align: center;
+            color: white;
+        }
+        .container {
+            display: none;
+            max-width: 90%;
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            color: black;
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            font-size: 1em;
+            margin: 10px 0;
+            text-align: center;
+            border: 2px solid #ff6f61;
+            border-radius: 5px;
+            width: 80%;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #ff6f61;
+            color: white;
+        }
+        button:hover {
+            background: #ff3b3b;
+        }
+        .hidden {
+            display: none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        }
+        .popup button {
+            background: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .timer-container {
+            display: none;
+            margin-top: 15px;
+            font-size: 1.2em;
+            color: red;
+        }
+        .small-text {
+            font-size: 0.9em;
+            color: black;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ingreso de fecha de aniversario -->
+    <div class="login-container" id="loginPage">
+        <h2>Ingresa la fecha de nuestro aniversario 💑</h2>
+        <h5>Cuidadito al equivocarte, sino verás que pasá! 😠</h5>
+        <input type="text" id="dateInput" placeholder="DD/MM/AA">
+        <button onclick="checkDate()">Ingresar</button>
+        <div class="timer-container" id="timerContainer">
+            ⏳ Tiempo restante: <span id="timer">5:00</span>
+            <p class="small-text">Ahora te esperas... 😏</p>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container" id="mainContent">
+        <h1>🎉 ¡9 Meses Contigo, Mi Amor! 💖</h1>
+        <p>Desde que supe que íbamos a ser papás, mi felicidad se multiplicó. 😍</p>
+        <p>Gracias por hacerme el hombre más feliz del mundo. No puedo esperar para ver a nuestro bebé y seguir construyendo esta hermosa historia de amor. 👶💘</p>
+    </div>
+
+    <!-- Popups -->
+    <div class="popup" id="errorPopup">
+        <h2 id="errorMessage">¿Pues con quién me confundes? Mmm... 😡</h2>
+        <button onclick="closePopup()">Intentar de nuevo</button>
+    </div>
+
+    <div class="popup" id="finalPopup">
+        <h2 id="finalMessage">Espero que esta vez sí recuerdes la fecha... porque quién sabe en quién estás pensando... 😒</h2>
+        <button onclick="closeFinalPopup()">Intentar de nuevo</button>
+    </div>
+
+    <script>
+        let failedAttempts = 0;
+        let isBlocked = false;
+        let countdown;
+        let reloadCount = localStorage.getItem("reloadCount") || 0;
+        let increasedTime = localStorage.getItem("increasedTime") || false; // Para asegurar que solo aumente 1 vez
+    
+        function checkDate() {
+            let inputDate = document.getElementById("dateInput").value.trim();
+            let correctDate = "09/05/24";
+        
+            if (isBlocked) {
+                document.getElementById("timerContainer").style.display = "block";
+                return;
+            }
+        
+            if (inputDate === correctDate) {
+                localStorage.setItem("auth", "authenticated"); // Guarda el estado de autenticación
+                window.location.href = "../home2.html"; // Redirige a la pantalla principal
+            } else {
+                failedAttempts++;
+                if (failedAttempts === 1) {
+                    showErrorPopup("¿Pues con quién me confundes? Mmm... 😡");
+                } else if (failedAttempts === 2) {
+                    showErrorPopup("Mmm sigues confundiéndome... ya me estoy preocupando... 😒");
+                } else if (failedAttempts === 3) {
+                    showErrorPopup("¡Ya me enojé! No quiero que veas nada... 😠");
+                    startBlockTimer(300); // 5 minutos
+                }
+            }
+        }        
+    
+        function showErrorPopup(message) {
+            document.getElementById("errorMessage").innerText = message;
+            document.getElementById("errorPopup").style.display = "block";
+        }
+    
+        function closePopup() {
+            document.getElementById("errorPopup").style.display = "none";
+        }
+    
+        function startBlockTimer(seconds) {
+            isBlocked = true;
+            let blockEndTime = localStorage.getItem("blockTime");
+    
+            if (!blockEndTime) {
+                localStorage.setItem("blockTime", Date.now() + seconds * 1000);
+            }
+    
+            document.getElementById("timerContainer").style.display = "block";
+            updateTimer();
+        }
+    
+        function updateTimer() {
+            let blockTime = localStorage.getItem("blockTime");
+            if (!blockTime) return;
+    
+            let remaining = Math.floor((blockTime - Date.now()) / 1000);
+            if (remaining <= 0) {
+                localStorage.removeItem("blockTime");
+                showFinalPopup();
+                return;
+            }
+    
+            let minutes = Math.floor(remaining / 60);
+            let seconds = remaining % 60;
+            document.getElementById("timer").innerText = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+            setTimeout(updateTimer, 1000);
+        }
+    
+        function showFinalPopup() {
+            document.getElementById("finalPopup").style.display = "block";
+        }
+    
+        function closeFinalPopup() {
+            document.getElementById("finalPopup").style.display = "none";
+        }
+    
+        // Control de recargas
+        reloadCount++;
+        localStorage.setItem("reloadCount", reloadCount);
+    
+        if (reloadCount === 1) {
+            alert("Si piensas que haciendo trampa recargando vas a poder acceder, ni lo intentes... Va a aumentar a 10 minutos. 😏");
+            if (!increasedTime) {
+                localStorage.setItem("blockTime", Date.now() + 600 * 1000); // Aumenta a 10 min solo una vez
+                localStorage.setItem("increasedTime", true);
+            }
+        } else if (localStorage.getItem("blockTime")) {
+            startBlockTimer((localStorage.getItem("blockTime") - Date.now()) / 1000);
+        }
+    </script>
+    
+</body>
+</html>

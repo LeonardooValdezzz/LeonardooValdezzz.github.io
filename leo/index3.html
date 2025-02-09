@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alexandria&family=Great+Vibes&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>¿Quieres ser mi pareja?</title>
+    <style>
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background: #e20ee2;
+            color: white;
+            font-size: 18px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #cd099f;
+            transform: scale(1.1);
+        }
+
+        .logout-btn i {
+            font-size: 20px;
+        }
+
+        body {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 90%;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2em;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .heart {
+            font-size: 4em;
+            animation: heartbeat 1s infinite;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 5px;
+        }
+
+        .yes {
+            background: #28a745;
+            color: white;
+        }
+
+        .yes:hover {
+            background: #218838;
+        }
+
+        .no {
+            background: #dc3545;
+            color: white;
+            position: absolute;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            max-width: 90%;
+        }
+
+        .popup img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .popup button {
+            background: #ff416c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Cubo 3D */
+        .cube-container {
+            width: 150px;
+            height: 150px;
+            perspective: 500px;
+            margin: 10px auto;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: spin 5s infinite linear;
+        }
+
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #fff;
+        }
+
+        .front {
+            transform: rotateY(0deg) translateZ(75px);
+            background-image: url('../img/mlove.png');
+        }
+
+        .back {
+            transform: rotateY(180deg) translateZ(75px);
+            background-image: url('../img/mlove2.png');
+        }
+
+        .left {
+            transform: rotateY(-90deg) translateZ(75px);
+            background-image: url('../img/mlove3.png');
+        }
+
+        .right {
+            transform: rotateY(90deg) translateZ(75px);
+            background-image: url('../img/mlove4.png');
+        }
+
+        .top {
+            transform: rotateX(90deg) translateZ(75px);
+            background-image: url('../img/mlove5.png');
+        }
+
+        .bottom {
+            transform: rotateX(-90deg) translateZ(75px);
+            background-image: url('../img/mlove6.png');
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotateY(0deg) rotateX(0deg);
+            }
+
+            100% {
+                transform: rotateY(360deg) rotateX(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>¿Quieres ser mi pareja este San Valentín? 💖</h1>
+        <div class="heart">❤️</div>
+        <div class="buttons">
+            <button class="yes" onclick="acceptLove()">Sí, quiero 💘</button>
+            <button class="no" id="noBtn">No 😢</button>
+        </div>
+    </div>
+
+    <!-- Popup de aceptación -->
+    <div class="popup" id="popup1">
+        <h2>¡Eres el amor de mi vida! 💖</h2>
+        <p>Este es un nuevo comienzo y no puedo esperar para pasar el resto de mi vida contigo y con nuestro bebé en
+            camino. ¡Te amo con todo mi corazón! 💕👶</p>
+
+        <!-- Cubo 3D -->
+        <div class="cube-container">
+            <div class="cube">
+                <div class="face front"></div>
+                <div class="face back"></div>
+                <div class="face left"></div>
+                <div class="face right"></div>
+                <div class="face top"></div>
+                <div class="face bottom"></div>
+            </div>
+        </div>
+
+        <button onclick="closePopup('popup1')">Cerrar</button>
+    </div>
+
+    <!-- Popup de rechazo -->
+    <div class="popup" id="popup2">
+        <h2>¿En serio me dices que no? 😭</h2>
+        <p>Creí que me amabas tanto como yo a tí...</p>
+        <center><img src="img/PatricioTriste.gif" alt="Triste"></center>
+        <br>
+        <button onclick="closePopup('popup2')">Perdón, sí quiero 💖</button>
+    </div>
+    <!-- Botón de Cerrar Sesión -->
+    <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+    </button>
+    <script>
+        function logout() {
+            window.location.href = "../home2.html"; // Redirige al login
+        }
+        let noClickCount = 0;
+
+        function acceptLove() {
+            document.getElementById("popup1").style.display = "block";
+        }
+
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = "none";
+        }
+
+        function moveButton() {
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            let button = document.getElementById('noBtn');
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+            noClickCount++;
+
+            if (noClickCount >= 3) {
+                alert("¡No es de que quieras! Ya eres mi esposa y vamos a estar juntos por siempre. ❤️👶");
+            } else {
+                document.getElementById("popup2").style.display = "block";
+            }
+        }
+
+        let noButton = document.getElementById('noBtn');
+        noButton.addEventListener('mouseover', moveButton);
+        noButton.addEventListener('touchstart', moveButton);
+    </script>
+</body>
+
+</html>

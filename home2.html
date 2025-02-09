@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Libro Mágico</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alexandria&family=Great+Vibes&family=Poppins:wght@400;600&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #f8cdda, #1e3c72);
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .book {
+      width: 320px;
+      height: 420px;
+      perspective: 1200px;
+      position: relative;
+    }
+
+    .page {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background: #fff5f3;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+      transition: transform 1s ease-in-out;
+      transform-origin: left;
+      backface-visibility: hidden;
+    }
+
+    .cover {
+      background: url('./img/Amor2L.jfif') center/cover;
+      font-family: 'Great Vibes', cursive;
+      font-size: 36px;
+      color: #ffffff;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .book .page:nth-child(1) {
+      z-index: 6;
+    }
+
+    .book .page:nth-child(2) {
+      z-index: 5;
+    }
+
+    .book .page:nth-child(3) {
+      z-index: 4;
+    }
+
+    .book .page:nth-child(4) {
+      z-index: 3;
+    }
+
+    .book .page:nth-child(5) {
+      z-index: 2;
+    }
+
+    .book .page:last-child {
+      z-index: 1;
+    }
+
+    .flipped {
+      transform: rotateY(-180deg);
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .links a {
+      padding: 12px 20px;
+      background: #ff99b6;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .links a:hover {
+      background: #ff6680;
+      transform: scale(1.1);
+    }
+
+    .middle-button {
+      margin-top: 30px;
+      padding: 15px 30px;
+      background: #ff7f50;
+      color: white;
+      font-size: 20px;
+      font-family: 'Great Vibes', cursive;
+      text-decoration: none;
+      border-radius: 50px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .middle-button:hover {
+      background: #ff6a3d;
+      transform: scale(1.05);
+    }
+
+    .heart {
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 28px;
+      animation: fall 4s infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        top: -50px;
+        opacity: 1;
+      }
+
+      100% {
+        top: 100vh;
+        opacity: 0;
+      }
+    }
+
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      background: #ff4d4d;
+      color: white;
+      font-size: 18px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .logout-btn:hover {
+      background: #ff3333;
+      transform: scale(1.1);
+    }
+
+    .logout-btn i {
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="book" id="book">
+    <div class="page cover" onclick="nextPage()">💖 Nuestro Libro 💖 
+      <br>
+      🥰 Regalo de 9 meses 🥰
+    </div>
+    <div class="page">
+      <h2>Un Mensaje Especial para Ti</h2>
+      <p>Este libro representa de manera especial las páginas que en su momento creé con todo mi amor para ti. Quizá, en
+        el futuro, haya nuevos capítulos, pero los que vivimos juntos siempre serán los más valiosos, especialmente
+        ahora, porque nuestro hijo está en camino y será parte de esos nuevos capítulos. 🥰👶✨<br> 💖¡TU ESPOSO TE AMA
+        INFINITAMENTE! 💖</p>
+      <div class="links">
+        <a href="#" onclick="nextPage(); return false;">Siguiente página</a>
+        <a href="#" onclick="prevPage(); return false;">Página anterior</a>
+      </div>
+    </div>
+
+    <div class="page">
+      <h2>Capítulo 1</h2>
+      <p>Está es la primer página que te hice 🥰 <br>
+        (Ya no tengo acceso a modificar nada por qué perdí esa cuenta por lo cuál esa pertenece a un enlace distinto
+        pero fué con mucho amor) ❤
+      </p>
+      <div class="links">
+        <a href="#" onclick="nextPage(); return false;">Siguiente página</a>
+        <a href="#" onclick="prevPage(); return false;">Página anterior</a>
+      </div>
+      <a href="https://leonardovaldezz.github.io/Leonardo/index.html" class="middle-button">Ir a Página Especial 1</a>
+    </div>
+    <div class="page">
+      <h2>Capítulo 2</h2>
+      <p>Recuerdo de nuestro 3er y 4to Mes juntos💘 
+        <br>
+        Además de una Flor que te hice ❤🥰
+      </p>
+      <div class="links">
+        <a href="#" onclick="nextPage(); return false;">Siguiente página</a>
+        <a href="#" onclick="prevPage(); return false;">Página anterior</a>
+      </div>
+      <a href="./index.html" class="middle-button">Ir a Página Especial 2</a>
+    </div>
+    <div class="page">
+      <h2>Capítulo 3</h2>
+      <p>Recuerdo de nuestros 6 meses  juntos 💘</p>
+      <div class="links">
+        <a href="#" onclick="nextPage(); return false;">Siguiente página</a>
+        <a href="#" onclick="prevPage(); return false;">Página anterior</a>
+      </div>
+      <a href="./leo/index.html" class="middle-button">Ir a Página Especial 3</a>
+    </div>
+    <div class="page">
+      <h2>Capítulo 4 </h2>
+      <p>Feliz 14 de febrero 💘</p>
+      <div class="links">
+        <!--<a href="#" onclick="nextPage(); return false;">Siguiente página</a>-->
+        <a href="#" onclick="prevPage(); return false;">Página anterior</a>
+      </div>
+      <a href="./leo/index3.html" class="middle-button">Ir a Página Especial 4</a>
+    </div>
+    <!--
+    <div class="page">
+      <h2>Capítulo 5</h2>
+      <p>El futuro que juntos construiremos, con amor y esperanza.</p>
+      <div class="links">
+        <a href="#" onclick="nextPage(); return false;">Siguiente página</a>
+        <a href="#" onclick="prevPage(); return false;">Página anterior</a>
+      </div>
+      <a href="pagina5.html" class="middle-button">Ir a Página Especial 5</a>
+    </div>
+  -->
+  </div>
+
+  
+  <div class="heart" id="heart"></div>
+  <!-- Botón de Cerrar Sesión -->
+  <button class="logout-btn" onclick="logout()">
+    <i class="fas fa-sign-out-alt"></i>
+  </button>
+
+  <script>    
+    function logout() {
+      //localStorage.removeItem("auth"); // Borra la autenticación
+      window.location.href = "leo/index4.html"; // Redirige al login
+    }
+
+    let currentPage = 0;
+    const pages = document.querySelectorAll('.page');
+    const totalPages = pages.length;
+
+    function nextPage() {
+      if (currentPage < totalPages - 1) {
+        pages[currentPage].classList.add('flipped');
+        currentPage++;
+        pages[currentPage].classList.remove('flipped');
+        updatePageVisibility();
+      }
+    }
+
+    function prevPage() {
+      if (currentPage > 0) {
+        pages[currentPage].classList.add('flipped');
+        currentPage--;
+        pages[currentPage].classList.remove('flipped');
+        updatePageVisibility();
+      }
+    }
+
+    function updatePageVisibility() {
+      pages.forEach((page, index) => {
+        if (index < currentPage) {
+          page.style.display = 'none'; // Oculta las páginas anteriores
+        } else {
+          page.style.display = 'flex'; // Muestra la página actual y siguientes
+        }
+      });
+    }
+
+    // Función para generar corazones aleatorios
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '💖';
+      document.body.appendChild(heart);
+
+      const randomLeft = Math.random() * 100; // aleatorio entre 0 y 100%
+      const animationDuration = Math.random() * 2 + 3; // entre 3 y 5 segundos
+
+      heart.style.left = randomLeft + '%';
+      heart.style.animationDuration = animationDuration + 's';
+
+      setTimeout(() => {
+        heart.remove(); // Elimina el corazón después de que cae
+      }, animationDuration * 1000);
+    }
+
+    // Generar corazones cada 1 segundo
+    setInterval(createHeart, 1000);
+  </script>
+</body>
+
+</html>

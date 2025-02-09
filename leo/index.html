@@ -4,9 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alexandria&family=Great+Vibes&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <title>Milka</title>
 </head>
 <style>
+    .logout-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background: #e20ee2;
+        color: white;
+        font-size: 18px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .logout-btn:hover {
+        background: #cd099f;
+        transform: scale(1.1);
+    }
+
+    .logout-btn i {
+        font-size: 20px;
+    }
+
     :root {
         --heart-color: #ff5873;
         --hover-color: #C1275C;
@@ -104,10 +132,19 @@
         <button class="button button__negative">NO</button>
         <button class="button button__error">Lo siento, NUNCA TE DIRÉ ADIOS🥰 <br> Regresar..</button>
     </div>
+    <!-- Botón de Cerrar Sesión -->
+    <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+    </button>
 </body>
 
 </html>
 <script>
+
+    function logout() {
+        window.location.href = "../home2.html"; // Redirige al login
+    }
+
     const alternatives = [
         { text: "", images: "../img/Amor1L.jfif" },
         { text: "Te prometo que será inolvidable, como cuando nos hicimos novios", images: "../img/Amor2.jfif" },

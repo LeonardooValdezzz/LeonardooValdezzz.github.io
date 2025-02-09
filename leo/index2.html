@@ -4,8 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alexandria&family=Great+Vibes&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <title>Medio Año Especial</title>
     <style>
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background: #e20ee2;
+            color: white;
+            font-size: 18px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #cd099f;
+            transform: scale(1.1);
+        }
+
+        .logout-btn i {
+            font-size: 20px;
+        }
+
         /* Estilo de pantalla completa */
         body,
         html {
@@ -224,10 +252,17 @@
         <img id="memory-image" src="" alt="Recuerdo" style="display:none;">
     </div>
 
+    <!-- Botón de Cerrar Sesión -->
+    <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+    </button>
     <!-- Audio de fondo -->
     <audio id="background-music" src="../Musica/Max Torres - Nunca Te Diré Adiós (.mp3" loop></audio>
 
     <script>
+        function logout() {
+            window.location.href = "../home2.html"; // Redirige al login
+        }
         const mensajes = [
             { texto: "Mi niña💖", detalle: "Eres lo más hermoso que me ha pasado. 🌟 Siempre haces mi vida más bonita. 😘", imagen: '../img/corazon1.jfif' },
             { texto: "Mi preciosa 🌹", detalle: "Tu sonrisa ilumina mis días. 🌞 Cada momento contigo es un regalo. 🎁", imagen: '../img/corazon6.jfif' },

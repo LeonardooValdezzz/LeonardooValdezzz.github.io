@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    href="https://fonts.googleapis.com/css2?family=Alexandria&family=Great+Vibes&family=Poppins:wght@400;600&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <title>Mi Amor</title>
     <style>
         body {
@@ -122,6 +126,30 @@
             background-color: #ff1493;
             transform: scale(1.1);
         }
+
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background: #e20ee2;
+            color: white;
+            font-size: 18px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #cd099f;
+            transform: scale(1.1);
+        }
+
+        .logout-btn i {
+            font-size: 20px;
+        }
     </style>
 </head>
 
@@ -145,13 +173,28 @@
 
             <div class="button-container">
                 <a href="index2.html" class="btn-love">¡Haz clic aquí!</a>
-                <a href="flores.html" class="btn-love">Flor</a>               
-                <a href="leo/index.html" class="btn-love">6 Meses</a>
+                <a href="flores.html" class="btn-love">Flor</a>
             </div>
         </div>
     </div>
 
+    <!-- Botón de Cerrar Sesión -->
+    <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+    </button>
+
     <script>
+        // Verifica si el usuario está autenticado
+        if (!localStorage.getItem("auth")) {
+            alert("Tramposa! Primero Inicia Sesión! 😚");
+            window.location.href = "leo/index4.html"; // Redirige al login si no tiene acceso
+        }
+
+        function logout() {
+            localStorage.removeItem("auth"); // Borra la autenticación
+            window.location.href = "./home2.html"; // Redirige al login
+        }
+
         const messageDiv = document.getElementById('message');
 
         const messages = [
