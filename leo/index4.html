@@ -300,6 +300,8 @@
             let remaining = Math.floor((blockTime - Date.now()) / 1000);
             if (remaining <= 0) {
                 sessionStorage.removeItem("blockTime");
+                isBlocked = false; // Desbloquear el campo de entrada
+                document.getElementById("timerContainer").style.display = "none";
                 showFinalPopup();
                 return;
             }
