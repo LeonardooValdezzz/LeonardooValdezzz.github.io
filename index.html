@@ -183,9 +183,9 @@
         <i class="fas fa-sign-out-alt"></i>
     </button>
 
-    <script>
-        // Verifica si el usuario está autenticado
-        if (!localStorage.getItem("auth")) {
+    <script>      
+       // Verifica si el usuario está autenticado
+        if (!sessionStorage.getItem("auth")) { // Asegúrate de usar sessionStorage aquí
             alert("Tramposa! Primero Inicia Sesión! 😚");
             window.location.href = "leo/index4.html"; // Redirige al login si no tiene acceso
         }

@@ -213,9 +213,9 @@
 
     <!-- Ingreso de fecha de aniversario -->
     <div class="login-container" id="loginPage">
-        <h2>Ingresa la fecha de nuestro aniversario 💑</h2>
+        <h2>Ingresa la fecha de nuestro aniversario 🥰❤️</h2>
         <h5>Cuidadito al equivocarte, sino verás que pasá! 😠</h5>
-        <input type="text" id="dateInput" placeholder="DD/MM/AA">
+        <input type="text" id="dateInput" placeholder="DD/MM/AA" autocomplete="off">
         <button onclick="checkDate()">Ingresar</button>
         <div class="timer-container" id="timerContainer">
             ⏳ Tiempo restante: <span id="timer">5:00</span>
@@ -247,7 +247,7 @@
         let countdown;
         let reloadCount = sessionStorage.getItem("reloadCount") || 0;
         let increasedTime = sessionStorage.getItem("increasedTime") || false; // Para asegurar que solo aumente 1 vez
-    
+        
         function checkDate() {
             let inputDate = document.getElementById("dateInput").value.trim();
             let correctDate = "09/05/24";
@@ -256,9 +256,8 @@
                 document.getElementById("timerContainer").style.display = "block";
                 return;
             }
-        
             if (inputDate === correctDate) {
-                sessionStorage.setItem("auth", "authenticated"); // Guarda el estado de autenticación
+                sessionStorage.setItem("auth", "authenticated"); // Guarda el estado de autenticación en sessionStorage
                 window.location.href = "../home2.html"; // Redirige a la pantalla principal
             } else {
                 failedAttempts++;
@@ -268,57 +267,57 @@
                     showErrorPopup("Mmm sigues confundiéndome... ya me estoy preocupando... 😒");
                 } else if (failedAttempts === 3) {
                     showErrorPopup("¡Ya me enojé! No quiero que veas nada... 😠");
-                    startBlockTimer(300); // 5 minutos
+                    startBlockTimer(60); // 1 minuto (cambia 300 a 60)
                 }
             }
-        }        
-    
+        }
+        
         function showErrorPopup(message) {
             document.getElementById("errorMessage").innerText = message;
             document.getElementById("errorPopup").style.display = "block";
         }
-    
+        
         function closePopup() {
             document.getElementById("errorPopup").style.display = "none";
         }
-    
+        
         function startBlockTimer(seconds) {
             isBlocked = true;
             let blockEndTime = sessionStorage.getItem("blockTime");
-    
+        
             if (!blockEndTime) {
                 sessionStorage.setItem("blockTime", Date.now() + seconds * 1000);
             }
-    
+        
             document.getElementById("timerContainer").style.display = "block";
             updateTimer();
         }
-    
+        
         function updateTimer() {
             let blockTime = sessionStorage.getItem("blockTime");
             if (!blockTime) return;
-    
+        
             let remaining = Math.floor((blockTime - Date.now()) / 1000);
             if (remaining <= 0) {
                 sessionStorage.removeItem("blockTime");
                 showFinalPopup();
                 return;
             }
-    
+        
             let minutes = Math.floor(remaining / 60);
             let seconds = remaining % 60;
             document.getElementById("timer").innerText = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
             setTimeout(updateTimer, 1000);
         }
-    
+        
         function showFinalPopup() {
             document.getElementById("finalPopup").style.display = "block";
         }
-    
+        
         function closeFinalPopup() {
             document.getElementById("finalPopup").style.display = "none";
         }
-    
+        
         // Control de recargas
         if (sessionStorage.getItem("blockTime")) {
             let remainingTime = (sessionStorage.getItem("blockTime") - Date.now()) / 1000;
@@ -328,21 +327,20 @@
                 sessionStorage.removeItem("blockTime");
             }
         }
-    
+        
         window.addEventListener("beforeunload", function (e) {
             if (failedAttempts >= 3 && !increasedTime) {
                 e.preventDefault();
-                e.returnValue = "Si recargas la página, el tiempo de bloqueo aumentará a 10 minutos. ¿Estás seguro?";
+                e.returnValue = "Si recargas la página, el tiempo de bloqueo aumentará a 2 minutos. ¿Estás seguro?";
             }
         });
-    
+        
         window.addEventListener("unload", function () {
             if (failedAttempts >= 3 && !increasedTime) {
-                sessionStorage.setItem("blockTime", Date.now() + 600 * 1000); // Aumenta a 10 minutos
+                sessionStorage.setItem("blockTime", Date.now() + 120 * 1000); // Aumenta a 2 minutos (cambia 600 a 120)
                 sessionStorage.setItem("increasedTime", true);
             }
         });
     </script>
-    
 </body>
 </html>

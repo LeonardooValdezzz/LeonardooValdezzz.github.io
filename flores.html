@@ -314,8 +314,13 @@
     </button>
 
     <script>
-        function logout() {            
+        function logout() {
             window.location.href = "./home2.html"; // Redirige al login
+        }
+        // Verifica si el usuario está autenticado
+        if (!sessionStorage.getItem("auth")) { // Asegúrate de usar sessionStorage aquí
+            alert("Tramposa! Primero Inicia Sesión! 😚");
+            window.location.href = "leo/index4.html"; // Redirige al login si no tiene acceso
         }
         const flowerContainer = document.getElementById('flower-container');
         const petals = document.querySelectorAll('.petal');

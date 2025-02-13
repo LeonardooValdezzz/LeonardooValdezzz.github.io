@@ -119,12 +119,15 @@
             text-align: center;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
             max-width: 90%;
+            width: 90%;
         }
 
         .popup img {
-            width: 200px;
+            width: 100%;
+            max-width: 200px;
             height: auto;
             border-radius: 10px;
+            margin: 10px 0;
         }
 
         .popup button {
@@ -132,9 +135,18 @@
             color: white;
             border: none;
             padding: 10px 20px;
-            margin-top: 10px;
+            margin: 5px;
             cursor: pointer;
             border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .popup button.yes {
+            background: #28a745;
+        }
+
+        .popup button.no {
+            background: #dc3545;
         }
 
         /* Cubo 3D */
@@ -237,24 +249,67 @@
 
     <!-- Popup de rechazo -->
     <div class="popup" id="popup2">
-        <h2>¿En serio me dices que no? 😭</h2>
-        <p>Creí que me amabas tanto como yo a tí...</p>
-        <center><img src="img/PatricioTriste.gif" alt="Triste"></center>
+        <h2 id="popup2Title">¿En serio me dices que no? 😭</h2>
+        <p id="popup2Text">Creí que me amabas tanto como yo a tí...</p>
+        <center><img id="popup2Image" src="img/PatricioTriste.gif" alt="Triste"></center>
         <br>
-        <button onclick="closePopup('popup2')">Perdón, sí quiero 💖</button>
+        <button class="yes" onclick="acceptLove()">Sí, quiero 💖</button>
+        <button class="no" onclick="nextPopup()">No 😢</button>
     </div>
+
     <!-- Botón de Cerrar Sesión -->
     <button class="logout-btn" onclick="logout()">
         <i class="fas fa-sign-out-alt"></i>
     </button>
+
     <script>
+        // Verifica si el usuario está autenticado
+        if (!sessionStorage.getItem("auth")) {
+            alert("Tramposa! Primero Inicia Sesión! 😚");
+            window.location.href = "../leo/index4.html"; // Redirige al login si no tiene acceso
+        }
+
         function logout() {
             window.location.href = "../home2.html"; // Redirige al login
         }
+
         let noClickCount = 0;
+        const popup2Content = [
+            {
+                title: "¿En serio me dices que no? 🥺",
+                text: "Creí que me amabas tanto como yo a tí... ¿Acaso ya no sientes lo mismo?",
+                image: "img/BuggsTriste.gif"
+            },
+            {
+                title: "¿Otra vez me dices que no? 😢",
+                text: "Mi corazón está roto... ¿No quieres en verdad?",
+                image: "img/GatoTriste.gif"
+            },
+            {
+                title: "¡No puedo creerlo! 😭",
+                text: "¿Ya no me quieres? ¿No que seríamos una familia?",
+                image: "img/StitchTriste.gif"
+            },
+            {
+                title: "¡Es la última vez! 😠",
+                text: "Si me dices que no otra vez, no te perdono. ¡Ya no juego contigo!",
+                image: "img/PikachuTriste.gif"
+            },
+            {
+                title: "¡Ya me hartaste! 😡",
+                text: "¿Sabes qué? Ya no importa lo que digas. ¡Eres mi esposa y punto!",
+                image: "img/GokuEnojado.gif"
+            },
+            {
+                title: "¡Ya no tienes opción! 😤",
+                text: "¡Ya basta! Eres mi esposa y yo mando. No tienes opción. ❤️👶",
+                image: "img/BobTriste.gif"
+            }
+        ];
 
         function acceptLove() {
             document.getElementById("popup1").style.display = "block";
+            closePopup('popup2'); // Cierra el popup de "No" si se elige "Sí"
         }
 
         function closePopup(popupId) {
@@ -269,11 +324,30 @@
             button.style.top = `${y}px`;
             noClickCount++;
 
-            if (noClickCount >= 3) {
-                alert("¡No es de que quieras! Ya eres mi esposa y vamos a estar juntos por siempre. ❤️👶");
+            if (noClickCount >= popup2Content.length) {
+                alert("¡Ya basta! Eres mi esposa y yo mando. No tienes opción. ❤️👶");
+                button.disabled = true; // Desactiva el botón "No"
             } else {
+                updatePopup2Content();
                 document.getElementById("popup2").style.display = "block";
             }
+        }
+
+        function nextPopup() {
+            noClickCount++;
+            if (noClickCount >= popup2Content.length) {
+                alert("¡Ya basta! Eres mi esposa y yo mando. No tienes opción. ❤️👶");
+                closePopup('popup2');
+            } else {
+                updatePopup2Content();
+            }
+        }
+
+        function updatePopup2Content() {
+            const content = popup2Content[noClickCount - 1];
+            document.getElementById("popup2Title").innerText = content.title;
+            document.getElementById("popup2Text").innerText = content.text;
+            document.getElementById("popup2Image").src = content.image;
         }
 
         let noButton = document.getElementById('noBtn');

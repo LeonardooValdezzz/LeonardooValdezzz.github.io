@@ -260,6 +260,11 @@
     <audio id="background-music" src="../Musica/Max Torres - Nunca Te Diré Adiós (.mp3" loop></audio>
 
     <script>
+        // Verifica si el usuario está autenticado
+        if (!sessionStorage.getItem("auth")) { // Asegúrate de usar sessionStorage aquí
+            alert("Tramposa! Primero Inicia Sesión! 😚");
+            window.location.href = "../leo/index4.html"; // Redirige al login si no tiene acceso
+        }  
         function logout() {
             window.location.href = "../home2.html"; // Redirige al login
         }

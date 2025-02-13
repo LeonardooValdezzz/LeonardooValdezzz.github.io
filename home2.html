@@ -178,9 +178,9 @@
 
 <body>
   <div class="book" id="book">
-    <div class="page cover" onclick="nextPage()">💖 Nuestro Libro 💖 
+    <div class="page cover" onclick="nextPage()">💖 Nuestro Libro 💖
       <br>
-      🥰 Regalo de 9 meses 🥰
+       Regalo de 9 meses 
     </div>
     <div class="page">
       <h2>Un Mensaje Especial para Mi Esposa ❤🥰</h2>
@@ -208,7 +208,7 @@
     </div>
     <div class="page">
       <h2>Capítulo 2 ❤</h2>
-      <p>Recuerdo de nuestro 3er y 4to Mes juntos💘 
+      <p>Recuerdo de nuestro 3er y 4to Mes juntos💘
         <br>
         Además de una Flor que te hice ❤🥰
       </p>
@@ -220,7 +220,7 @@
     </div>
     <div class="page">
       <h2>Capítulo 3 ❤</h2>
-      <p>Recuerdo de nuestros 6 meses  juntos 💘</p>
+      <p>Recuerdo de nuestros 6 meses juntos 💘</p>
       <div class="links">
         <a href="#" onclick="nextPage(); return false;">Siguiente página</a>
         <a href="#" onclick="prevPage(); return false;">Página anterior</a>
@@ -238,7 +238,8 @@
     </div>
     <div class="page">
       <h2>Capítulo 5 ❤</h2>
-      <p>Este libro no tendrá fin, porque mi vida a tu lado es mi objetivo día a día. Juntos, seremos felices con nuestro bebé en camino. 💖👶✨</p>
+      <p>Este libro no tendrá fin, porque mi vida a tu lado es mi objetivo día a día. Juntos, seremos felices con
+        nuestro bebé en camino. 💖👶✨</p>
       <div class="links">
         <a href="#" onclick="prevPage(); return false;">Página anterior</a>
       </div>
@@ -251,12 +252,18 @@
     <i class="fas fa-sign-out-alt"></i>
   </button>
 
-  <script>    
+  <script>
     function logout() {
-      //localStorage.removeItem("auth"); // Borra la autenticación
+      sessionStorage.removeItem("auth"); // Elimina la sesión
+      localStorage.removeItem("auth");  // Si usaste localStorage, también elimínalo
       window.location.href = "leo/index4.html"; // Redirige al login
     }
 
+    // Verifica si el usuario está autenticado
+    if (!sessionStorage.getItem("auth")) { // Asegúrate de usar sessionStorage aquí
+      alert("Tramposa! Primero Inicia Sesión! 😚");
+      window.location.href = "leo/index4.html"; // Redirige al login si no tiene acceso
+    }
     let currentPage = 0;
     const pages = document.querySelectorAll('.page');
     const totalPages = pages.length;

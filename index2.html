@@ -328,6 +328,11 @@
     </div>
 
     <script>
+        // Verifica si el usuario está autenticado
+        if (!sessionStorage.getItem("auth")) { // Asegúrate de usar sessionStorage aquí
+            alert("Tramposa! Primero Inicia Sesión! 😚");
+            window.location.href = "leo/index4.html"; // Redirige al login si no tiene acceso
+        }
         let slideIndex = 1;
         showSlides(slideIndex);
 
