@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <title>💕 Nuestros 11 Meses y el Bebé en Camino 💕</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400&display=swap');
+
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background: #e20ee2;
+            color: white;
+            font-size: 18px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #cd099f;
+            transform: scale(1.1);
+        }
+
+        .logout-btn i {
+            font-size: 20px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fff0f5;
+            color: #5a3e3e;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('img/love9.jfif');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 50px;
+            background-color: rgba(255, 245, 245, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #f8c8dc;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            margin: 20px;
+            backdrop-filter: blur(2px);
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #e75480;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #e75480, #ffb6c1, #e75480);
+            border-radius: 3px;
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            color: #e75480;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .poem {
+            font-size: 1.3rem;
+            line-height: 2.2;
+            margin: 0 auto;
+            max-width: 600px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .verse {
+            margin-bottom: 25px;
+            position: relative;
+            transition: all 0.5s ease;
+            padding: 10px 0;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .verse:hover {
+            background-color: rgba(255, 182, 193, 0.1);
+            border-radius: 10px;
+        }
+
+        .cipher {
+            display: inline-block;
+            padding: 2px 5px;
+            margin: 0 1px;
+            border-radius: 5px;
+            background: linear-gradient(145deg, #e75480, #ff69b4);
+            color: transparent;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            font-weight: 400;
+            box-shadow: 0 3px 6px rgba(231, 84, 128, 0.2);
+            min-width: 15px;
+            text-align: center;
+        }
+
+        .cipher:hover {
+            background: linear-gradient(145deg, #ff69b4, #ff1493);
+            color: white;
+            transform: translateY(-5px) rotate(2deg);
+            box-shadow: 0 8px 15px rgba(255, 105, 180, 0.4);
+            z-index: 2;
+        }
+
+        .cipher::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('img/love15.jfif') center/cover;
+            opacity: 0.1;
+            border-radius: 3px;
+        }
+
+        .baby-element {
+            position: absolute;
+            opacity: 0.9;
+            z-index: 1;
+            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));
+            transition: all 1s ease;
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: contain;
+        }
+
+        .baby-1 {
+            top: 20px;
+            left: 20px;
+            transform: rotate(-15deg);
+            width: 80px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .baby-2 {
+            bottom: 20px;
+            right: 30px;
+            transform: rotate(25deg);
+            width: 90px;
+            animation: float 7s ease-in-out infinite 1s;
+        }
+
+        .baby-3 {
+            top: 40%;
+            left: 10%;
+            width: 70px;
+            animation: float 5s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-15deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(-10deg);
+            }
+        }
+
+        .photo-frame {
+            margin: 30px auto;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid #f8c8dc;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reveal-btn {
+            margin-top: 30px;
+            padding: 15px 35px;
+            background: linear-gradient(145deg, #e75480, #ff69b4);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-family: 'Playfair Display', serif;
+            box-shadow: 0 8px 20px rgba(231, 84, 128, 0.3);
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .reveal-btn:hover {
+            background: linear-gradient(145deg, #ff69b4, #ff1493);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(255, 105, 180, 0.5);
+            letter-spacing: 1.5px;
+        }
+
+        .reveal-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .reveal-btn:hover::before {
+            left: 100%;
+        }
+
+        .hidden-message {
+            margin-top: 30px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            border-left: 5px solid #e75480;
+            display: none;
+            animation: fadeIn 1.5s ease;
+            backdrop-filter: blur(3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            z-index: 2;
+        }
+
+        .hidden-message p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-style: italic;
+            color: #5a3e3e;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) rotateX(20deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 10;
+            font-size: 24px;
+            color: #ff69b4;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: heartFloat 3s ease-in-out forwards;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(0) scale(0.8);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .romantic-frame {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: calc(100% - 20px);
+            height: calc(100% - 20px);
+            border: 2px solid #f8c8dc;
+            border-radius: 15px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.7;
+        }
+
+        .family-photos {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .family-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border: 3px solid #f8c8dc;
+            transition: all 0.4s ease;
+        }
+
+        .family-photo:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 12px 25px rgba(231, 84, 128, 0.3);
+        }
+
+        .family-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .baby-feature {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 230, 240, 0.7);
+            border-radius: 15px;
+            border-left: 5px solid #e75480;
+        }
+
+        .baby-feature h3 {
+            color: #e75480;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin: 20px;
+                border-radius: 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .poem {
+                font-size: 1.1rem;
+                line-height: 1.8;
+                white-space: normal;
+            }
+
+            .verse {
+                white-space: normal;
+            }
+
+            .baby-element {
+                width: 50px;
+                opacity: 0.8;
+            }
+
+            .baby-1,
+            .baby-2,
+            .baby-3 {
+                width: 50px;
+            }
+
+            .photo-frame {
+                width: 150px;
+                height: 150px;
+            }
+
+            .family-photos {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .family-photo {
+                width: 120px;
+                height: 120px;
+            }
+
+            .hidden-message {
+                padding: 20px;
+            }
+
+            .reveal-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="romantic-frame"></div>
+        <img src="img/love15.jfif" alt="Bebé decorativo" class="baby-element baby-1">
+        <img src="img/mlove6.png" alt="Bebé decorativo" class="baby-element baby-2">
+        <img src="img/mlove2.png" alt="Bebé decorativo" class="baby-element baby-3">
+
+        <h1>💕 11 Meses Contigo 💕</h1>
+        <div class="subtitle">Y la bendición de nuestro bebé en camino 👶🍼</div>
+
+        <div class="photo-frame">
+            <img src="img/Amor2.jfif" alt="Foto de pareja">
+        </div>
+
+        <div class="poem" id="poem">
+            <div class="verse">
+                <span class="cipher">H</span><span class="cipher">o</span><span class="cipher">y</span><span
+                    class="cipher">c</span><span class="cipher">e</span><span class="cipher">l</span><span
+                    class="cipher">e</span><span class="cipher">b</span><span class="cipher">r</span><span
+                    class="cipher">a</span><span class="cipher">m</span><span class="cipher">o</span><span
+                    class="cipher">s</span><span class="cipher">1</span><span class="cipher">1</span><span
+                    class="cipher">m</span><span class="cipher">e</span><span class="cipher">s</span><span
+                    class="cipher">e</span><span class="cipher">s</span>
+            </div>
+
+            <div class="verse">
+                <span class="cipher">d</span><span class="cipher">e</span><span class="cipher">a</span><span
+                    class="cipher">m</span><span class="cipher">o</span><span class="cipher">r</span><span
+                    class="cipher">y</span><span class="cipher">c</span><span class="cipher">r</span><span
+                    class="cipher">e</span><span class="cipher">c</span><span class="cipher">i</span><span
+                    class="cipher">m</span><span class="cipher">i</span><span class="cipher">e</span><span
+                    class="cipher">n</span><span class="cipher">t</span><span class="cipher">o</span>
+            </div>
+
+            <div class="verse">
+                <span class="cipher">y</span><span class="cipher">a</span><span class="cipher">h</span><span
+                    class="cipher">o</span><span class="cipher">r</span><span class="cipher">a</span><span
+                    class="cipher">n</span><span class="cipher">u</span><span class="cipher">e</span><span
+                    class="cipher">s</span><span class="cipher">t</span><span class="cipher">r</span><span
+                    class="cipher">o</span><span class="cipher">b</span><span class="cipher">e</span><span
+                    class="cipher">b</span><span class="cipher">é</span>
+            </div>
+
+            <div class="verse">
+                <span class="cipher">l</span><span class="cipher">l</span><span class="cipher">e</span><span
+                    class="cipher">n</span><span class="cipher">a</span><span class="cipher">r</span><span
+                    class="cipher">á</span><span class="cipher">n</span><span class="cipher">u</span><span
+                    class="cipher">e</span><span class="cipher">s</span><span class="cipher">t</span><span
+                    class="cipher">r</span><span class="cipher">o</span><span class="cipher">s</span><span
+                    class="cipher">h</span><span class="cipher">o</span><span class="cipher">g</span><span
+                    class="cipher">a</span><span class="cipher">r</span>
+            </div>
+        </div>
+
+        <div class="baby-feature">
+            <h3>👶 Nuestro Milagro en Camino</h3>
+            <p>Estoy infinitamente agradecido por este regalo de vida que viene en camino. Cada día me emociona más
+                pensar en formar una familia contigo.</p>
+        </div>
+
+        <div class="family-photos">
+            <div class="family-photo">
+                <img src="img/Amor1L.jfif" alt="Foto romántica 1">
+            </div>
+            <div class="family-photo">
+                <img src="img/Amor2L.jfif" alt="Foto de bebé">
+            </div>
+            <div class="family-photo">
+                <img src="img/Ultrasonido.jpg" alt="Foto romántica 2">
+            </div>
+        </div>
+
+        <button class="reveal-btn" id="revealBtn">✨ Descubre Mi Mensaje Especial ✨</button>
+
+        <div class="hidden-message" id="hiddenMessage">
+            <p>💖 Estos 11 meses han sido los más hermosos de mi vida, y ahora con nuestro bebé en camino, la felicidad
+                es completa.</p>
+            <p>👨‍👩‍👦 Eres mi compañera de vida, la madre de mi hijo/a, mi todo. No tengo palabras para expresar lo
+                agradecido que estoy por esta bendición.</p>
+            <p>🌟 Cada día a tu lado es un regalo, y ver cómo llevas a nuestro bebé con tanto amor me hace amarte más
+                cada día.</p>
+            <p>🍼 Estoy emocionado por esta nueva etapa, por ver tu vientre crecer y por prepararnos para recibir a esta
+                personita que nos unirá para siempre.</p>
+            <p>💞 Te amo más que ayer, menos que mañana, y sobre todo, te amo con todo lo que implica formar una familia
+                contigo.</p>
+        </div>
+    </div>
+    <!-- Botón de Cerrar Sesión -->
+    <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+    </button>
+    <script>
+        // Verifica si el usuario está autenticado
+        if (!sessionStorage.getItem("auth")) { // Asegúrate de usar sessionStorage aquí
+            alert("Tramposa! Primero Inicia Sesión! 😚");
+            window.location.href = "../leo/index4.html"; // Redirige al login si no tiene acceso
+        }
+        function logout() {
+            window.location.href = "./home2.html"; // Redirige al login
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const ciphers = document.querySelectorAll('.cipher');
+            const revealBtn = document.getElementById('revealBtn');
+            const hiddenMessage = document.getElementById('hiddenMessage');
+            const babyElements = document.querySelectorAll('.baby-element');
+
+            // Efecto al pasar el mouse por las letras
+            ciphers.forEach(cipher => {
+                cipher.addEventListener('mouseover', function () {
+                    this.style.color = 'white';
+                    this.style.background = 'linear-gradient(145deg, #ff1493, #e75480)';
+                    this.style.transform = 'translateY(-5px) rotate(3deg)';
+                    this.style.boxShadow = '0 10px 20px rgba(255, 20, 147, 0.4)';
+
+                    // Crear corazón flotante
+                    createHeart(this.getBoundingClientRect().left + 5, this.getBoundingClientRect().top);
+
+                    // Efecto en los elementos de bebé
+                    babyElements.forEach(element => {
+                        element.style.transform = `rotate(${Math.random() * 20 - 10}deg) scale(1.1)`;
+                    });
+                });
+
+                cipher.addEventListener('mouseout', function () {
+                    if (!revealBtn.classList.contains('all-revealed')) {
+                        this.style.color = 'transparent';
+                        this.style.background = 'linear-gradient(145deg, #e75480, #ff69b4)';
+                        this.style.transform = 'translateY(0) rotate(0)';
+                        this.style.boxShadow = '0 3px 6px rgba(231, 84, 128, 0.2)';
+                    }
+
+                    // Resetear elementos de bebé
+                    babyElements.forEach(element => {
+                        element.style.transform = '';
+                    });
+                });
+            });
+
+            // Revelar todo el poema
+            revealBtn.addEventListener('click', function () {
+                // Animación de revelación
+                ciphers.forEach((cipher, index) => {
+                    setTimeout(() => {
+                        cipher.style.color = 'white';
+                        cipher.style.background = 'linear-gradient(145deg, #ff1493, #e75480)';
+                        cipher.style.transform = 'translateY(-5px) rotate(' + (index % 2 === 0 ? '3deg' : '-3deg') + ')';
+                        cipher.style.boxShadow = '0 10px 20px rgba(255, 20, 147, 0.4)';
+
+                        // Efecto de chispas
+                        createHeart(
+                            cipher.getBoundingClientRect().left + 5,
+                            cipher.getBoundingClientRect().top,
+                            true
+                        );
+                    }, index * 50);
+                });
+
+                // Mostrar mensaje oculto
+                setTimeout(() => {
+                    hiddenMessage.style.display = 'block';
+                    this.textContent = '💝 Para la Futura Mamá de Mi Hijo/a 💝';
+                    this.style.background = 'linear-gradient(145deg, #ff1493, #e75480)';
+                    this.classList.add('all-revealed');
+
+                    // Efecto de confeti de corazones y bebés
+                    for (let i = 0; i < 50; i++) {
+                        setTimeout(() => {
+                            createHeart(
+                                Math.random() * window.innerWidth,
+                                window.innerHeight + 50,
+                                true
+                            );
+                        }, i * 100);
+                    }
+
+                    // Animación de elementos de bebé
+                    babyElements.forEach(element => {
+                        element.style.animation = 'none';
+                        void element.offsetWidth;
+                        element.style.animation = 'float 3s ease-in-out infinite';
+                        element.style.transform = 'scale(1.2)';
+                    });
+
+                    setTimeout(() => {
+                        babyElements.forEach(element => {
+                            element.style.transform = '';
+                        });
+                    }, 1000);
+                }, ciphers.length * 50 + 500);
+            });
+
+            // Crear corazones flotantes
+            function createHeart(x, y, isConfetti = false) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = `${x}px`;
+                heart.style.top = `${y}px`;
+                heart.style.fontSize = `${Math.random() * 25 + 15}px`;
+                heart.style.opacity = '0';
+
+                // Variar colores para confeti
+                if (isConfetti) {
+                    const heartEmojis = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🤎', '🖤', '🤍', '💕', '💞', '💓', '💗', '💖', '💘', '💝', '👶', '🍼', '🧸'];
+                    heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                    const colors = ['#ff69b4', '#e75480', '#ff1493', '#ffb6c1', '#db7093', '#add8e6'];
+                    heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                    heart.style.transform = `rotate(${Math.random() * 360}deg)`;
+                }
+
+                document.body.appendChild(heart);
+
+                // Animación
+                const animationDuration = Math.random() * 3 + 2;
+
+                heart.animate([
+                    { transform: 'translateY(0) scale(0.8)', opacity: 0 },
+                    { transform: 'translateY(-20px) scale(1.1)', opacity: 1, offset: 0.2 },
+                    { transform: `translateY(-${Math.random() * 150 + 100}px) translateX(${Math.random() * 100 - 50}px) scale(${Math.random() * 0.7 + 0.3})`, opacity: 0 }
+                ], {
+                    duration: animationDuration * 1000,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.9, 1)'
+                });
+
+                setTimeout(() => {
+                    heart.remove();
+                }, animationDuration * 1000);
+            }
+        });
+    </script>
+</body>
+
+</html>
